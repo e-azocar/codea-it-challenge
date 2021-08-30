@@ -1,30 +1,43 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React from "react";
+import Airport from "../components/Airport";
+import styled from "styled-components";
+import routesJSON from "../json/routes.json";
+import Head from 'next/head'
 
-export default function Search() {
-  const [isOrigin, setIsOrigin] = useState(true);
-  return (
-    <main>
-      <article>
-        <h1>Select your {isOrigin ? 'origin' : 'destination'}</h1>
-        <section>
-          <p>
-            Here should be a card approach list of all available origin
-            airports. When an origin airport is selected, the list should
-            display all available destination for given selection. The card
-            should have:
-          </p>
-          <ul>
-            <li>A dummy image</li>
-            <li>Should be selectable by clicking the whole card</li>
-            <li>Display the airport code</li>
-            <li>Display the location city name</li>
-          </ul>
-        </section>
-        <Link href="/flights">
-          <a>Start your journey!</a>
-        </Link>
-      </article>
-    </main>
-  );
-}
+const AirportList = styled.div`
+	padding: 2rem 4rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 1.5rem;
+	max-width: 1200px;
+`;
+
+const PageTitle = styled.h1`
+	text-align: center;
+	margin: 2rem;
+	color: #ff5733;
+`;
+
+const Search = () => {
+	return (
+		<>
+			<Head>
+				<title>Select your origin</title>
+			</Head>
+
+			<PageTitle>Select your origin</PageTitle>
+
+			<AirportList>
+				{routesJSON.routes.map((route) => (
+					<Airport
+						data={route}
+						key={route.code}
+						href={`/search/${route.code}`}
+					/>
+				))}
+			</AirportList>
+		</>
+	);
+};
+
+export default Search;

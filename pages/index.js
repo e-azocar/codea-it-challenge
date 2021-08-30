@@ -1,20 +1,25 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import Head from "next/head";
 
-export default function Home() {
-  return (
-    <main>
-      <h1>Home Page</h1>
-      <article>
-        <section>
-          <h2>Promotions</h2>
-        </section>
-        <section>
-          <Link href="/search">
-            <a>Search</a>
-          </Link>
-        </section>
-      </article>
-    </main>
-  );
-}
+const Home = () => {
+	return (
+		<main className="home-main">
+			<Head>
+				<title>Home</title>
+			</Head>
+
+			<div className="main-container">
+				<h1 className="brand-name">Flights Finder</h1>
+				<h3>
+					Here you will find the best flight deals
+				</h3>
+				<Link href="/search">
+					<a className="search">Search</a>
+				</Link>
+			</div>
+		</main>
+	);
+};
+
+export default Home;
